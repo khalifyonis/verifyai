@@ -7,15 +7,12 @@ import {
   Mail,
   User as UserIcon,
   Globe,
-  Sparkles,
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
   AlertCircle,
   Eye,
   EyeOff,
-  Building2,
-  ScanLine,
 } from "lucide-react";
 import { loginUser, registerUser, googleAuthUser, User } from "@/lib/api";
 
@@ -50,7 +47,6 @@ export function AuthModal({
   // Google Simulation / Modal state
   const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
   const [googleEmailInput, setGoogleEmailInput] = useState("");
-  const [googleNameInput, setGoogleNameInput] = useState("");
 
   if (!isOpen) return null;
 
@@ -143,8 +139,8 @@ export function AuthModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-md rounded-3xl bg-[#091120] border border-cyan-500/30 p-7 space-y-6 shadow-[0_0_50px_rgba(6,182,212,0.25)] relative overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="w-full max-w-md rounded-3xl bg-white dark:bg-[#091120] border border-slate-200 dark:border-cyan-500/30 p-7 space-y-6 shadow-2xl dark:shadow-[0_0_50px_rgba(6,182,212,0.25)] relative overflow-hidden transition-colors">
         {/* Ambient Glow */}
         <div className="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -153,37 +149,37 @@ export function AuthModal({
         <div className="flex items-center justify-between relative z-10">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 p-[1.5px] shadow-lg">
-              <div className="w-full h-full bg-[#091120] rounded-[10px] flex items-center justify-center">
-                <ShieldCheck className="w-5 h-5 text-cyan-400" />
+              <div className="w-full h-full bg-white dark:bg-[#091120] rounded-[10px] flex items-center justify-center">
+                <ShieldCheck className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
               </div>
             </div>
             <div>
-              <div className="text-sm font-extrabold font-mono tracking-wider text-white">
-                VERI<span className="text-cyan-400">FAI</span>
+              <div className="text-sm font-extrabold font-mono tracking-wider text-slate-900 dark:text-white">
+                VERI<span className="text-cyan-600 dark:text-cyan-400">FAI</span>
               </div>
-              <div className="text-[11px] text-slate-400">Anti-Counterfeit Supplement Protection</div>
+              <div className="text-[11px] text-slate-500 dark:text-slate-400">Anti-Counterfeit Supplement Protection</div>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+            className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Mode Switch Tabs */}
-        <div className="grid grid-cols-2 p-1 rounded-2xl bg-slate-900 border border-white/10 relative z-10">
+        <div className="grid grid-cols-2 p-1 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 relative z-10">
           <button
             type="button"
             onClick={() => {
               setMode("login");
               setErrorMsg(null);
             }}
-            className={`py-2 text-xs font-bold rounded-xl transition-all ${
+            className={`py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               mode === "login"
-                ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white keep-white shadow-md"
-                : "text-slate-400 hover:text-white"
+                ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white shadow-sm"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
             Sign In
@@ -194,10 +190,10 @@ export function AuthModal({
               setMode("register");
               setErrorMsg(null);
             }}
-            className={`py-2 text-xs font-bold rounded-xl transition-all ${
+            className={`py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               mode === "register"
-                ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white keep-white shadow-md"
-                : "text-slate-400 hover:text-white"
+                ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white shadow-sm"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
             Create Account
@@ -206,14 +202,14 @@ export function AuthModal({
 
         {/* Status Alerts */}
         {errorMsg && (
-          <div className="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+          <div className="p-3 rounded-2xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-rose-500 dark:text-rose-400 shrink-0" />
             <span>{errorMsg}</span>
           </div>
         )}
         {successMsg && (
-          <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+          <div className="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
             <span>{successMsg}</span>
           </div>
         )}
@@ -222,7 +218,7 @@ export function AuthModal({
         <button
           type="button"
           onClick={() => setIsGoogleModalOpen(true)}
-          className="w-full flex items-center justify-center gap-3 py-2.5 px-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-900 font-semibold text-xs shadow-md hover:shadow-lg transition-all"
+          className="w-full flex items-center justify-center gap-3 py-2.5 px-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-semibold text-xs border border-slate-300 dark:border-white/10 shadow-xs hover:shadow-md transition-all cursor-pointer"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
             <path
@@ -246,10 +242,10 @@ export function AuthModal({
         </button>
 
         {/* Divider */}
-        <div className="flex items-center gap-3 text-[11px] font-mono text-slate-500">
-          <div className="flex-1 h-[1px] bg-white/10" />
+        <div className="flex items-center gap-3 text-[11px] font-mono text-slate-400 dark:text-slate-500">
+          <div className="flex-1 h-[1px] bg-slate-200 dark:bg-white/10" />
           <span>OR WITH EMAIL</span>
-          <div className="flex-1 h-[1px] bg-white/10" />
+          <div className="flex-1 h-[1px] bg-slate-200 dark:bg-white/10" />
         </div>
 
         {/* Main Auth Form */}
@@ -258,33 +254,33 @@ export function AuthModal({
             <>
               {/* Username Input */}
               <div>
-                <label className="text-[11px] font-mono text-slate-300 block mb-1">
-                  Username <span className="text-cyan-400">*</span>
+                <label className="text-[11px] font-mono text-slate-700 dark:text-slate-300 block mb-1">
+                  Username <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-2.5 text-xs font-mono text-cyan-400 font-bold">@</span>
+                  <span className="absolute left-3 top-2.5 text-xs font-mono text-cyan-600 dark:text-cyan-400 font-bold">@</span>
                   <input
                     type="text"
                     required
                     value={username}
                     onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))}
                     placeholder="fitness_warrior"
-                    className="w-full pl-8 pr-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 font-mono"
+                    className="w-full pl-8 pr-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 font-mono transition-colors"
                   />
                 </div>
               </div>
 
               {/* Full Name */}
               <div>
-                <label className="text-[11px] font-mono text-slate-300 block mb-1">Full Name</label>
+                <label className="text-[11px] font-mono text-slate-700 dark:text-slate-300 block mb-1">Full Name</label>
                 <div className="relative">
-                  <UserIcon className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
+                  <UserIcon className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                   <input
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g. Liban Farah"
-                    className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                    className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                   />
                 </div>
               </div>
@@ -293,29 +289,29 @@ export function AuthModal({
 
           {/* Email */}
           <div>
-            <label className="text-[11px] font-mono text-slate-300 block mb-1">
-              Email Address <span className="text-cyan-400">*</span>
+            <label className="text-[11px] font-mono text-slate-700 dark:text-slate-300 block mb-1">
+              Email Address <span className="text-cyan-600 dark:text-cyan-400">*</span>
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
+              <Mail className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@domain.com"
-                className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
               />
             </div>
           </div>
 
           {/* Password */}
           <div>
-            <label className="text-[11px] font-mono text-slate-300 block mb-1">
-              Password <span className="text-cyan-400">*</span>
+            <label className="text-[11px] font-mono text-slate-700 dark:text-slate-300 block mb-1">
+              Password <span className="text-cyan-600 dark:text-cyan-400">*</span>
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
+              <Lock className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
               <input
                 type={showPassword ? "text" : "password"}
                 required
@@ -323,12 +319,12 @@ export function AuthModal({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder={mode === "register" ? "At least 6 characters" : "••••••••"}
-                className="w-full pl-9 pr-10 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                className="w-full pl-9 pr-10 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-2.5 text-slate-400 hover:text-white"
+                className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-700 dark:hover:text-white cursor-pointer"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -337,15 +333,15 @@ export function AuthModal({
 
           {mode === "register" && (
             <div>
-              <label className="text-[11px] font-mono text-slate-300 block mb-1">Country</label>
+              <label className="text-[11px] font-mono text-slate-700 dark:text-slate-300 block mb-1">Country</label>
               <div className="relative">
-                <Globe className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
+                <Globe className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                 <input
                   type="text"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   placeholder="Somalia"
-                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-white/10 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                 />
               </div>
             </div>
@@ -355,7 +351,7 @@ export function AuthModal({
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 px-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-cyan-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs shadow-[0_0_25px_rgba(6,182,212,0.4)] flex items-center justify-center gap-2 disabled:opacity-50 transition-all cursor-pointer"
+            className="w-full py-2.5 px-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-cyan-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-cyan-500/20 dark:shadow-[0_0_25px_rgba(6,182,212,0.4)] flex items-center justify-center gap-2 disabled:opacity-50 transition-all cursor-pointer"
           >
             <span>{loading ? "Authenticating..." : mode === "login" ? "Sign In to VERIFAI" : "Complete Registration"}</span>
             <ArrowRight className="w-4 h-4" />
@@ -364,36 +360,36 @@ export function AuthModal({
 
         {/* Demo Fast Logins Section */}
         {mode === "login" && (
-          <div className="pt-2 border-t border-white/10 space-y-2">
-            <div className="text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider">
+          <div className="pt-3 border-t border-slate-200 dark:border-white/10 space-y-2">
+            <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
               Quick 1-Click Demo Personas:
             </div>
             <div className="grid grid-cols-2 gap-2 text-[11px]">
               <button
                 type="button"
                 onClick={() => quickLogin("admin@verifai.io", "Super Admin")}
-                className="px-2 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 font-medium text-left transition-colors"
+                className="px-2 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-500/10 dark:hover:bg-rose-500/20 border border-rose-200 dark:border-rose-500/30 text-rose-800 dark:text-rose-300 font-medium text-left transition-colors cursor-pointer"
               >
                 👮 Super Admin (Hassan)
               </button>
               <button
                 type="button"
                 onClick={() => quickLogin("inspector@verifai.io", "Inspector")}
-                className="px-2 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 font-medium text-left transition-colors"
+                className="px-2 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 dark:bg-amber-500/10 dark:hover:bg-amber-500/20 border border-amber-200 dark:border-amber-500/30 text-amber-800 dark:text-amber-300 font-medium text-left transition-colors cursor-pointer"
               >
                 🔍 Field Inspector (Sarah)
               </button>
               <button
                 type="button"
                 onClick={() => quickLogin("partner@glanbia.com", "Company Rep")}
-                className="px-2 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-medium text-left transition-colors"
+                className="px-2 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-500/10 dark:hover:bg-emerald-500/20 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 font-medium text-left transition-colors cursor-pointer"
               >
                 🏢 Brand Rep (Glanbia)
               </button>
               <button
                 type="button"
                 onClick={() => quickLogin("consumer@verifai.io", "Consumer")}
-                className="px-2 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 font-medium text-left transition-colors"
+                className="px-2 py-1.5 rounded-xl bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-500/10 dark:hover:bg-cyan-500/20 border border-cyan-200 dark:border-cyan-500/30 text-cyan-800 dark:text-cyan-300 font-medium text-left transition-colors cursor-pointer"
               >
                 👤 Consumer (Ahmed)
               </button>
@@ -406,9 +402,9 @@ export function AuthModal({
       {/* Google Account Selector Dialog                                 */}
       {/* ───────────────────────────────────────────────────────────── */}
       {isGoogleModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-sm rounded-3xl bg-white text-slate-900 p-6 space-y-5 shadow-2xl relative">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-[#0D172A] text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 p-6 space-y-5 shadow-2xl relative">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
               <div className="flex items-center gap-2">
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -432,20 +428,20 @@ export function AuthModal({
               </div>
               <button
                 onClick={() => setIsGoogleModalOpen(false)}
-                className="p-1 rounded-lg hover:bg-slate-100 text-slate-500"
+                className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 text-slate-400 hover:text-slate-700 dark:hover:text-white cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <p className="text-xs text-slate-600">
-              Choose an account to continue to <span className="font-bold text-slate-900">VERIFAI</span>:
+            <p className="text-xs text-slate-600 dark:text-slate-300">
+              Choose an account to continue to <span className="font-bold text-slate-900 dark:text-white">VERIFAI</span>:
             </p>
 
             {/* Simulated Google User Item 1 */}
             <div
               onClick={() => handleGoogleAuth("ahmed.athlete@gmail.com", "Ahmed Athlete")}
-              className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-100 cursor-pointer transition-colors border border-slate-200"
+              className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 cursor-pointer transition-colors border border-slate-200 dark:border-white/10"
             >
               <img
                 src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80"
@@ -453,26 +449,26 @@ export function AuthModal({
                 className="w-9 h-9 rounded-full object-cover"
               />
               <div className="flex-1">
-                <div className="text-xs font-bold text-slate-900">Ahmed Athlete</div>
-                <div className="text-[11px] text-slate-500">ahmed.athlete@gmail.com</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-white">Ahmed Athlete</div>
+                <div className="text-[11px] text-slate-500 dark:text-slate-400">ahmed.athlete@gmail.com</div>
               </div>
             </div>
 
             {/* Custom Google Email input */}
-            <div className="pt-2 border-t border-slate-100 space-y-2">
-              <div className="text-[11px] text-slate-500 font-medium">Or enter your personal Gmail:</div>
+            <div className="pt-2 border-t border-slate-200 dark:border-white/10 space-y-2">
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Or enter your personal Gmail:</div>
               <input
                 type="email"
                 placeholder="your.name@gmail.com"
                 value={googleEmailInput}
                 onChange={(e) => setGoogleEmailInput(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500"
               />
               <button
                 type="button"
                 disabled={!googleEmailInput.includes("@")}
                 onClick={() => handleGoogleAuth(googleEmailInput, googleEmailInput.split("@")[0])}
-                className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-40 text-white font-semibold text-xs transition-colors"
+                className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-40 text-white font-semibold text-xs transition-colors cursor-pointer"
               >
                 Continue with {googleEmailInput || "Gmail"}
               </button>

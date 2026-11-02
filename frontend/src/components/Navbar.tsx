@@ -29,7 +29,6 @@ export function Navbar({ activeTab, onTabChange }: NavbarProps) {
   };
 
   return (
-  return (
     <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#070B14]/85 backdrop-blur-xl shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo */}

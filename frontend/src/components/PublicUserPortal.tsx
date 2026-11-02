@@ -387,42 +387,42 @@ export function PublicUserPortal({ onSwitchPortal }: PublicUserPortalProps) {
             <div className="relative">
               <button
                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer"
+                className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-all cursor-pointer"
               >
                 {currentUser.avatar_url ? (
                   <img
                     src={currentUser.avatar_url}
                     alt={currentUser.full_name || currentUser.username || currentUser.email}
-                    className="w-6 h-6 rounded-full object-cover ring-1 ring-cyan-400"
+                    className="w-6 h-6 rounded-full object-cover ring-1 ring-cyan-500"
                   />
                 ) : (
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-[10px] font-bold text-white uppercase ring-1 ring-cyan-400">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-[10px] font-bold text-white uppercase ring-1 ring-cyan-500">
                     {(currentUser.full_name || currentUser.username || currentUser.email).slice(0, 2)}
                   </div>
                 )}
                 <div className="text-left hidden sm:block">
-                  <div className="text-xs font-semibold text-slate-200 leading-tight">
+                  <div className="text-xs font-semibold text-slate-800 dark:text-slate-200 leading-tight">
                     {currentUser.full_name || currentUser.username}
                   </div>
-                  <div className="text-[10px] font-mono text-cyan-400 leading-tight">
+                  <div className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 leading-tight">
                     @{currentUser.username || currentUser.email.split("@")[0]}
                   </div>
                 </div>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
               </button>
 
               {/* Profile Dropdown Menu */}
               {isProfileDropdownOpen && (
-                <div className="absolute right-0 top-12 w-64 rounded-2xl bg-[#0D172A] border border-white/10 shadow-2xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 text-xs">
-                  <div className="px-3 py-2 border-b border-white/10 mb-1">
-                    <span className="font-bold text-white block">{currentUser.full_name || "VERIFAI User"}</span>
-                    <span className="text-[11px] font-mono text-cyan-400">@{currentUser.username || "user"}</span>
+                <div className="absolute right-0 top-12 w-64 rounded-2xl bg-white dark:bg-[#0D172A] border border-slate-200 dark:border-white/10 shadow-2xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 text-xs">
+                  <div className="px-3 py-2 border-b border-slate-200 dark:border-white/10 mb-1">
+                    <span className="font-bold text-slate-900 dark:text-white block">{currentUser.full_name || "VERIFAI User"}</span>
+                    <span className="text-[11px] font-mono text-cyan-600 dark:text-cyan-400">@{currentUser.username || "user"}</span>
                     <div className="mt-1 flex items-center gap-1">
-                      <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/30">
+                      <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-cyan-50 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30">
                         {currentUser.role.replace("_", " ")}
                       </span>
                       {currentUser.auth_provider === "google" && (
-                        <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                        <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/20">
                           Google
                         </span>
                       )}
@@ -434,9 +434,9 @@ export function PublicUserPortal({ onSwitchPortal }: PublicUserPortalProps) {
                       setIsProfileDropdownOpen(false);
                       setIsUploadModalOpen(true);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5 text-slate-300 hover:text-white flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center gap-2 cursor-pointer"
                   >
-                    <Camera className="w-3.5 h-3.5 text-cyan-400" />
+                    <Camera className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                     New Supplement Scan
                   </button>
 
@@ -445,14 +445,14 @@ export function PublicUserPortal({ onSwitchPortal }: PublicUserPortalProps) {
                       setIsProfileDropdownOpen(false);
                       setIsSafetyHubModalOpen(true);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5 text-slate-300 hover:text-white flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center gap-2 cursor-pointer"
                   >
-                    <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+                    <AlertTriangle className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
                     Regional Safety Hub
                   </button>
 
-                  <div className="border-t border-white/10 my-1.5" />
-                  <div className="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
+                  <div className="border-t border-slate-200 dark:border-white/10 my-1.5" />
+                  <div className="px-2 py-1 text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Switch Portal
                   </div>
                   <button
@@ -461,9 +461,9 @@ export function PublicUserPortal({ onSwitchPortal }: PublicUserPortalProps) {
                       if (onSwitchPortal) onSwitchPortal("admin");
                       else window.location.href = "/admin";
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-cyan-950/40 text-cyan-300 hover:text-white flex items-center gap-2 font-medium"
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-cyan-50 dark:hover:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 hover:text-cyan-900 dark:hover:text-white flex items-center gap-2 font-medium cursor-pointer"
                   >
-                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                     Admin Dashboard
                   </button>
                   <button
@@ -472,18 +472,18 @@ export function PublicUserPortal({ onSwitchPortal }: PublicUserPortalProps) {
                       if (onSwitchPortal) onSwitchPortal("company");
                       else window.location.href = "/company";
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-950/40 text-indigo-300 hover:text-white flex items-center gap-2 font-medium"
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 hover:text-indigo-900 dark:hover:text-white flex items-center gap-2 font-medium cursor-pointer"
                   >
-                    <Building2 className="w-3.5 h-3.5 text-indigo-400" />
+                    <Building2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                     Company / Brand Portal
                   </button>
 
-                  <div className="border-t border-white/10 my-1.5" />
+                  <div className="border-t border-slate-200 dark:border-white/10 my-1.5" />
                   <div className="px-3 py-1.5 flex items-center justify-between">
-                    <span className="text-slate-400 text-xs">Appearance</span>
+                    <span className="text-slate-600 dark:text-slate-400 text-xs">Appearance</span>
                     <ThemeToggle showLabel />
                   </div>
-                  <div className="border-t border-white/10 my-1" />
+                  <div className="border-t border-slate-200 dark:border-white/10 my-1" />
 
                   <button
                     onClick={() => {
@@ -491,7 +491,7 @@ export function PublicUserPortal({ onSwitchPortal }: PublicUserPortalProps) {
                       setCurrentUser(null);
                       setIsProfileDropdownOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-rose-500/10 text-rose-400 hover:text-rose-300 font-medium"
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 font-medium cursor-pointer"
                   >
                     Sign Out
                   </button>
@@ -505,9 +505,9 @@ export function PublicUserPortal({ onSwitchPortal }: PublicUserPortalProps) {
                   setAuthModalMode("login");
                   setIsAuthModalOpen(true);
                 }}
-                className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-semibold border border-slate-300 dark:border-white/15 shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
               >
-                <LogIn className="w-3.5 h-3.5 text-cyan-400" />
+                <LogIn className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                 <span>Sign In</span>
               </button>
 
@@ -523,6 +523,7 @@ export function PublicUserPortal({ onSwitchPortal }: PublicUserPortalProps) {
               </button>
             </div>
           )}
+
         </div>
       </header>
 
