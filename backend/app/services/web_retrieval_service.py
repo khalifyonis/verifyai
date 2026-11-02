@@ -31,158 +31,86 @@ class WebRetrievalService:
         return True
 
     @staticmethod
-    async def search_product_grounding(
-        brand: str,
+    async def generate_forensic_evaluation(
         product_name: str,
-        variant: Optional[str] = None,
-        gtin: Optional[str] = None
-    ) -> Dict[str, Any]:
+        brand: str,
+        barcode: Optional[str] = None,
+        batch_number: Optional[str] = None,
+        expiry_date: Optional[str] = None,
+        vision_data: Optional[Dict[str, Any]] = None,
+        registry_data: Optional[Dict[str, Any]] = None,
+        fda_recalls: Optional[List[Dict[str, Any]]] = None
+    ) -> Optional[Dict[str, Any]]:
         """
-        Executes web discovery for supplement details using Gemini with Google Search grounding
-        or authentic public registry fallback.
+        Synthesizes multimodal evidence, global registries, and regulatory alerts
+        using Gemini to produce an authoritative, convincing anti-counterfeit forensic evaluation.
         """
-        query = f"{brand} {product_name} {variant or ''} supplement verification {gtin or ''}".strip()
-        timestamp = datetime.now(timezone.utc).isoformat()
+        if not settings.GEMINI_API_KEY:
+            return None
 
-        # If Gemini API key is configured, use Gemini with Google Search tool
-        if settings.GEMINI_API_KEY:
-            try:
-                gemini_result = await WebRetrievalService._call_gemini_search(query)
-                if gemini_result:
-                    return gemini_result
-            except Exception as e:
-                # Log and proceed to fallback
-                pass
+        # Build comprehensive context for Gemini
+        vision_notes = vision_data.get("notes", "No visual packaging data") if vision_data else "No visual packaging data"
+        seal_status = "Intact" if (vision_data and vision_data.get("seal_intact")) else ("Not Detected / Missing" if vision_data else "Not Provided")
+        print_quality = vision_data.get("label_quality", "Unknown") if vision_data else "Not Assessed"
+        anomalies = vision_data.get("anomalies_detected", []) if vision_data else []
 
-        # Deterministic Grounding Fallback based on verified public directories
-        return WebRetrievalService._fallback_public_directory_search(brand, product_name, variant, gtin, timestamp)
-
-    @staticmethod
-    async def _call_gemini_search(query: str) -> Optional[Dict[str, Any]]:
-        """Invokes Gemini model with Google Search grounding."""
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={settings.GEMINI_API_KEY}"
-        
         prompt = (
-            f"Research the sports supplement product: '{query}'. "
-            "Identify: 1) Official manufacturer URL, 2) Whether it has NSF Certified for Sport or Informed Sport certification, "
-            "3) Any documented FDA safety warnings or counterfeit alerts. "
-            "Return JSON: {\"found\": bool, \"official_brand_url\": str, \"certifications\": [str], "
-            "\"safety_alerts\": [str], \"evidence_claims\": [{\"claim\": str, \"source_url\": str, \"supports\": bool}]}"
+            f"You are a World-Class Forensic Anti-Counterfeit and Product Authentication Specialist.\n"
+            f"A consumer has submitted a physical product for authentication with the following parameters:\n\n"
+            f"- Brand Name: {brand}\n"
+            f"- Product Title: {product_name}\n"
+            f"- Barcode / GTIN: {barcode or 'Not provided'}\n"
+            f"- Batch / Lot Number: {batch_number or 'Not provided'}\n"
+            f"- Expiry Date: {expiry_date or 'Not provided'}\n"
+            f"- Physical Security Seal: {seal_status}\n"
+            f"- Packaging Label Quality: {print_quality}\n"
+            f"- Visual Inspection Notes: {vision_notes}\n"
+            f"- Detected Anomalies: {', '.join(anomalies) if anomalies else 'None'}\n"
+            f"- Global Registry Status: {'Verified in Public Database (' + registry_data.get('source', '') + ')' if registry_data else 'Unregistered in local catalog'}\n"
+            f"- Regulatory Recall Alerts: {'Active Alert: ' + fda_recalls[0].get('reason', '') if fda_recalls else 'No active FDA recalls found'}\n\n"
+            f"INSTRUCTIONS:\n"
+            f"Perform an exhaustive forensic verification and return a STRICT JSON response.\n"
+            f"The 'reasoning' field MUST BE THOROUGH AND CONVINCING (2-3 detailed paragraphs) explaining:\n"
+            f"1) Barcode structure and international registry status.\n"
+            f"2) Authentic manufacturer packaging hallmarks (security seals, typography, lot coding conventions).\n"
+            f"3) Safety, recall, and regulatory status.\n"
+            f"4) Definitive conclusion on whether the product is genuine, suspicious, or dangerous.\n\n"
+            f"JSON FORMAT REQUIREMENTS:\n"
+            f"{{\n"
+            f'  "verdict": "VERIFIED" | "SUSPICIOUS" | "OFFICIAL_WARNING" | "NOT_VERIFIED",\n'
+            f'  "verdict_title": "Concise professional title (e.g. Verified Genuine Global Product)",\n'
+            f'  "confidence_score": 96.5,\n'
+            f'  "reasoning": "Thorough, convincing 2-3 paragraph explanation...",\n'
+            f'  "verified_facts": ["Fact 1", "Fact 2", "Fact 3"],\n'
+            f'  "risk_signals": [{{"severity": "CRITICAL"|"HIGH"|"MEDIUM"|"LOW", "signal": "CODE", "description": "Details"}}],\n'
+            f'  "evidence_sources": [{{"name": "Source Name", "url": "https://...", "claim": "What was verified"}}],\n'
+            f'  "recommendation": "Clear actionable advice for the consumer.",\n'
+            f'  "limitations": "Scientific limitations of packaging verification."\n'
+            f"}}"
         )
 
         payload = {
             "contents": [{"parts": [{"text": prompt}]}],
-            "tools": [{"google_search": {}}],
             "generationConfig": {"response_mime_type": "application/json"}
         }
 
-        async with httpx.AsyncClient(timeout=12.0) as client:
-            resp = await client.post(url, json=payload)
-            if resp.status_code == 200:
-                data = resp.json()
-                text = data["candidates"][0]["content"]["parts"][0]["text"]
-                parsed = json.loads(text)
-                
-                # Extract grounding metadata if available
-                grounding_metadata = data["candidates"][0].get("groundingMetadata", {})
-                web_sources = grounding_metadata.get("groundingChunks", [])
-                
-                evidence = []
-                for claim in parsed.get("evidence_claims", []):
-                    evidence.append({
-                        "claim_supported": claim.get("claim"),
-                        "source_url": claim.get("source_url") or "https://www.google.com",
-                        "supports": claim.get("supports", True),
-                        "retrieval_timestamp": datetime.now(timezone.utc).isoformat()
-                    })
+        model = settings.GEMINI_MODEL or "gemini-3.5-flash"
+        models_to_try = [model, "gemini-3.5-flash", "gemini-3.7-flash"]
 
-                return {
-                    "method": "Gemini Google Search Grounding",
-                    "sources_found": len(web_sources),
-                    "evidence_claims": evidence,
-                    "certifications": parsed.get("certifications", []),
-                    "safety_alerts": parsed.get("safety_alerts", [])
-                }
+        async with httpx.AsyncClient(timeout=25.0) as client:
+            for m in models_to_try:
+                try:
+                    url = f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent?key={settings.GEMINI_API_KEY}"
+                    resp = await client.post(url, json=payload)
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        candidates = data.get("candidates", [])
+                        if candidates and "content" in candidates[0]:
+                            text = candidates[0]["content"]["parts"][0]["text"]
+                            parsed = json.loads(text)
+                            return parsed
+                except Exception as ex:
+                    print(f"[WebRetrievalService] Gemini model {m} failed: {ex}")
+                    continue
+
         return None
-
-    @staticmethod
-    def _fallback_public_directory_search(
-        brand: str,
-        product_name: str,
-        variant: Optional[str],
-        gtin: Optional[str],
-        timestamp: str
-    ) -> Dict[str, Any]:
-        """Provides verified directory references and attributions."""
-        evidence = []
-        brand_clean = brand.lower()
-
-        # Optimum Nutrition (Glanbia) known directory records
-        if "optimum nutrition" in brand_clean or "on" == brand_clean:
-            evidence.append({
-                "source_name": "Informed Sport Registry",
-                "source_category": "Third-Party Supplement Certification",
-                "source_url": "https://sport.wetestyoutrust.com/supplement-search/optimum-nutrition",
-                "claim_supported": f"Optimum Nutrition manufacturing facilities and formulations are registered under the Informed Choice / Informed Sport banned substance testing program.",
-                "extracted_passage": "Certified Brand: Optimum Nutrition. Tested for WADA prohibited substances.",
-                "classification": "SUPPORTING",
-                "is_verified_fact": True,
-                "retrieval_timestamp": timestamp
-            })
-            evidence.append({
-                "source_name": "Official Glanbia / ON Authentication Portal",
-                "source_category": "Official Manufacturer",
-                "source_url": "https://www.optimumnutrition.com/en-us/authentication",
-                "claim_supported": "Official security neck band with golden hologram seal and laser-printed bottom batch stamping required for authentic tubs.",
-                "extracted_passage": "Authentic Gold Standard Whey and Micronized Creatine containers feature embossed neck shrink-bands and authentic batch codes.",
-                "classification": "SUPPORTING",
-                "is_verified_fact": True,
-                "retrieval_timestamp": timestamp
-            })
-
-        # Dymatize known directory records
-        elif "dymatize" in brand_clean:
-            evidence.append({
-                "source_name": "Informed Sport Registry",
-                "source_category": "Third-Party Supplement Certification",
-                "source_url": "https://sport.wetestyoutrust.com/supplement-search/dymatize",
-                "claim_supported": "Dymatize ISO100 protein powders carry Informed Choice certification testing for banned athletic substances.",
-                "extracted_passage": "Certified Brand: Dymatize. Certified against prohibited athletic substances.",
-                "classification": "SUPPORTING",
-                "is_verified_fact": True,
-                "retrieval_timestamp": timestamp
-            })
-
-        # Cellucor / Nutrabolt records
-        elif "cellucor" in brand_clean or "c4" in brand_clean:
-            evidence.append({
-                "source_name": "Cellucor Official Product Portal",
-                "source_category": "Official Manufacturer",
-                "source_url": "https://cellucor.com/pages/quality-assurance",
-                "claim_supported": "Cellucor C4 products feature tamper-evident induction cap seals and registered batch tracking.",
-                "extracted_passage": "Manufactured in cGMP certified facilities with batch tracking on underside.",
-                "classification": "SUPPORTING",
-                "is_verified_fact": True,
-                "retrieval_timestamp": timestamp
-            })
-
-        # GS1 GTIN attribution
-        if gtin:
-            evidence.append({
-                "source_name": "Verified by GS1",
-                "source_category": "Global Barcode Registry",
-                "source_url": f"https://www.gs1.org/services/verified-by-gs1",
-                "claim_supported": f"GTIN {gtin} syntax and international prefix verified under GS1 global specifications.",
-                "extracted_passage": f"GTIN: {gtin}. Check digit compliant with GS1 Modulo-10 algorithm.",
-                "classification": "SUPPORTING",
-                "is_verified_fact": True,
-                "retrieval_timestamp": timestamp
-            })
-
-        return {
-            "method": "Public Directory & Manufacturer Registry",
-            "sources_found": len(evidence),
-            "evidence_claims": evidence,
-            "certifications": ["Informed Choice / Sport"] if ("optimum" in brand_clean or "dymatize" in brand_clean) else [],
-            "safety_alerts": []
-        }

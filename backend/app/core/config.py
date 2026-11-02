@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     
     # External AI / Vision settings
     GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-3.5-flash"
     AI_FALLBACK_MODE: bool = True
     
     class Config:

@@ -122,7 +122,7 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {result.verdict_title}
               </h2>
-              <p className="text-sm text-slate-700 dark:text-slate-200 mt-2 max-w-xl leading-relaxed">
+              <p className="text-sm text-slate-700 dark:text-slate-200 mt-3 leading-relaxed whitespace-pre-line max-w-2xl font-normal">
                 {result.explanation}
               </p>
             </div>
