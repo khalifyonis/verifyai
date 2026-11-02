@@ -1,0 +1,369 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-primary: #070B14;
+    --bg-secondary: #0D1527;
+    --bg-card: rgba(15, 23, 42, 0.7);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(6, 182, 212, 0.3);
+    --accent-cyan: #06B6D4;
+    --accent-emerald: #10B981;
+    --accent-indigo: #6366F1;
+    --accent-amber: #F59E0B;
+    --accent-rose: #F43F5E;
+  }
+
+  html.light,
+  html[data-theme="light"] {
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border-subtle: #E2E8F0;
+    --border-glow: rgba(6, 182, 212, 0.3);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: #F1F5F9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* ========================================================= */
+/* 1. SIDEBAR BUTTON STYLING (EXPLICIT FOR BOTH MODES)       */
+/* ========================================================= */
+
+/* Active sidebar button in ALL modes */
+.sidebar-btn-active {
+  background: linear-gradient(to right, #06B6D4, #0891B2) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.45) !important;
+  border: 1px solid rgba(6, 182, 212, 0.5) !important;
+}
+.sidebar-btn-active svg,
+.sidebar-btn-active span,
+.sidebar-btn-active * {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+/* --- DARK MODE SIDEBAR BUTTONS --- */
+.sidebar-btn,
+html.dark .sidebar-btn,
+html[data-theme="dark"] .sidebar-btn {
+  color: #CBD5E1 !important;
+  font-weight: 600;
+  border: 1px solid transparent;
+  background-color: transparent !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sidebar-btn svg,
+html.dark .sidebar-btn svg,
+html[data-theme="dark"] .sidebar-btn svg {
+  color: #38BDF8 !important;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+.sidebar-btn span,
+html.dark .sidebar-btn span,
+html[data-theme="dark"] .sidebar-btn span {
+  color: #CBD5E1 !important;
+}
+
+/* Dark mode hover: glowing cyan pill */
+.sidebar-btn:hover,
+html.dark .sidebar-btn:hover,
+html[data-theme="dark"] .sidebar-btn:hover {
+  background-color: rgba(6, 182, 212, 0.15) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(6, 182, 212, 0.4) !important;
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.25) !important;
+}
+.sidebar-btn:hover svg,
+html.dark .sidebar-btn:hover svg,
+html[data-theme="dark"] .sidebar-btn:hover svg {
+  color: #22D3EE !important;
+}
+.sidebar-btn:hover span,
+html.dark .sidebar-btn:hover span,
+html[data-theme="dark"] .sidebar-btn:hover span {
+  color: #FFFFFF !important;
+}
+
+/* --- LIGHT MODE SIDEBAR BUTTONS --- */
+html.light .sidebar-btn,
+html[data-theme="light"] .sidebar-btn,
+html:not(.dark) .sidebar-btn {
+  color: #1E293B !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+}
+html.light .sidebar-btn svg,
+html[data-theme="light"] .sidebar-btn svg,
+html:not(.dark) .sidebar-btn svg {
+  color: #0284C7 !important;
+  stroke: currentColor;
+}
+html.light .sidebar-btn span,
+html[data-theme="light"] .sidebar-btn span,
+html:not(.dark) .sidebar-btn span {
+  color: #1E293B !important;
+}
+
+/* Light mode hover: soft cyan background with dark cyan text */
+html.light .sidebar-btn:hover,
+html[data-theme="light"] .sidebar-btn:hover,
+html:not(.dark) .sidebar-btn:hover {
+  background-color: #E0F2FE !important;
+  color: #0369A1 !important;
+  border-color: #7DD3FC !important;
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.2) !important;
+}
+html.light .sidebar-btn:hover svg,
+html[data-theme="light"] .sidebar-btn:hover svg,
+html:not(.dark) .sidebar-btn:hover svg {
+  color: #0284C7 !important;
+}
+html.light .sidebar-btn:hover span,
+html[data-theme="light"] .sidebar-btn:hover span,
+html:not(.dark) .sidebar-btn:hover span {
+  color: #0369A1 !important;
+}
+
+/* ========================================================= */
+/* 2. TOP NAV TABS & PORTAL PILLS                            */
+/* ========================================================= */
+
+/* Active tab everywhere */
+.nav-tab-active {
+  background-color: #E0F2FE !important;
+  color: #0369A1 !important;
+  border: 1px solid #7DD3FC !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25) !important;
+}
+
+html.dark .nav-tab-active,
+html[data-theme="dark"] .nav-tab-active {
+  background-color: rgba(6, 182, 212, 0.18) !important;
+  color: #22D3EE !important;
+  border: 1px solid rgba(6, 182, 212, 0.5) !important;
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.3) !important;
+}
+
+/* Dark mode nav tabs */
+.nav-tab,
+html.dark .nav-tab,
+html[data-theme="dark"] .nav-tab {
+  color: #94A3B8 !important;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+.nav-tab:hover,
+html.dark .nav-tab:hover,
+html[data-theme="dark"] .nav-tab:hover {
+  color: #22D3EE !important;
+  background-color: rgba(6, 182, 212, 0.12) !important;
+  border-color: rgba(6, 182, 212, 0.3) !important;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.2) !important;
+}
+
+/* Light mode nav tabs */
+html.light .nav-tab,
+html[data-theme="light"] .nav-tab,
+html:not(.dark) .nav-tab {
+  color: #334155 !important;
+}
+html.light .nav-tab:hover,
+html[data-theme="light"] .nav-tab:hover,
+html:not(.dark) .nav-tab:hover {
+  color: #0369A1 !important;
+  background-color: #E0F2FE !important;
+  border-color: #7DD3FC !important;
+}
+
+/* Portal pills */
+.portal-pill-active {
+  background: linear-gradient(to right, #06B6D4, #0891B2) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.4) !important;
+}
+.portal-pill-active * {
+  color: #FFFFFF !important;
+}
+
+.portal-pill,
+html.dark .portal-pill,
+html[data-theme="dark"] .portal-pill {
+  color: #94A3B8 !important;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.portal-pill svg,
+html.dark .portal-pill svg,
+html[data-theme="dark"] .portal-pill svg {
+  color: #38BDF8 !important;
+}
+.portal-pill:hover,
+html.dark .portal-pill:hover,
+html[data-theme="dark"] .portal-pill:hover {
+  color: #FFFFFF !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.light .portal-pill,
+html[data-theme="light"] .portal-pill,
+html:not(.dark) .portal-pill {
+  color: #334155 !important;
+}
+html.light .portal-pill svg,
+html[data-theme="light"] .portal-pill svg,
+html:not(.dark) .portal-pill svg {
+  color: #0284C7 !important;
+}
+html.light .portal-pill:hover,
+html[data-theme="light"] .portal-pill:hover,
+html:not(.dark) .portal-pill:hover {
+  color: #0369A1 !important;
+  background-color: #E0F2FE !important;
+  border-color: #7DD3FC !important;
+}
+
+/* ========================================================= */
+/* 3. LIGHT MODE ROOT & FOUNDATIONAL STYLING                 */
+/* ========================================================= */
+html.light,
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html.light body,
+html[data-theme="light"] body {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* Light mode header */
+html.light header,
+html[data-theme="light"] header {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Light mode sidebar */
+html.light aside,
+html[data-theme="light"] aside {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ========================================================= */
+/* 4. DARK MODE UTILITIES & GLOW                             */
+/* ========================================================= */
+html.dark aside,
+html[data-theme="dark"] aside {
+  background-color: #091120 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark header,
+html[data-theme="dark"] header {
+  background-color: #0A1323 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Glass Panel */
+.glass-panel,
+html.dark .glass-panel,
+html[data-theme="dark"] .glass-panel {
+  background: rgba(13, 21, 39, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  color: #F8FAFC;
+}
+
+html.light .glass-panel,
+html[data-theme="light"] .glass-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  color: #0F172A;
+}
+
+/* Glass Input */
+.glass-input,
+html.dark .glass-input,
+html[data-theme="dark"] .glass-input {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #F8FAFC;
+  outline: none;
+}
+.glass-input:focus,
+html.dark .glass-input:focus,
+html[data-theme="dark"] .glass-input:focus {
+  border-color: rgba(6, 182, 212, 0.8);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+}
+
+html.light .glass-input,
+html[data-theme="light"] .glass-input {
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  color: #0F172A;
+  outline: none;
+}
+html.light .glass-input:focus,
+html[data-theme="light"] .glass-input:focus {
+  border-color: #0284C7;
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.2);
+  background: #FFFFFF;
+}
+
+.glass-card-hover {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(6, 182, 212, 0.15);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070B14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+html.light ::-webkit-scrollbar-track,
+html[data-theme="light"] ::-webkit-scrollbar-track,
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+html.light ::-webkit-scrollbar-thumb,
+html[data-theme="light"] ::-webkit-scrollbar-thumb,
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+}

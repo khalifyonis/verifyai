@@ -1,0 +1,21 @@
+{
+  "name": "verifai-fullstack",
+  "version": "1.0.0",
+  "description": "VERIFAI — AI-Powered Anti-Counterfeit Verification Platform",
+  "scripts": {
+    "dev:backend": "cd backend && .\\venv\\Scripts\\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "npx --yes concurrently -k -n \"BACKEND,FRONTEND\" -c \"cyan.bold,magenta.bold\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "cd frontend && npm run build",
+    "test:backend": "cd backend && .\\venv\\Scripts\\python.exe -m pytest tests/ -v"
+  },
+  "keywords": [
+    "anti-counterfeit",
+    "ai-verification",
+    "gs1",
+    "fastapi",
+    "nextjs"
+  ],
+  "author": "VERIFAI Team",
+  "license": "MIT"
+}
