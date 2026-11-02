@@ -119,21 +119,21 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
                 </span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {result.verdict_title}
               </h2>
-              <p className="text-sm text-slate-200 mt-2 max-w-xl leading-relaxed">
+              <p className="text-sm text-slate-700 dark:text-slate-200 mt-2 max-w-xl leading-relaxed">
                 {result.explanation}
               </p>
             </div>
           </div>
 
           {/* Radial Confidence Gauge */}
-          <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-900/60 border border-white/5 shrink-0 min-w-[140px]">
+          <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 shrink-0 min-w-[140px] shadow-xs">
             <div className="relative w-24 h-24 flex items-center justify-center">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                 <path
-                  className="text-slate-800"
+                  className="text-slate-200 dark:text-slate-800"
                   strokeWidth="3.5"
                   stroke="currentColor"
                   fill="none"
@@ -149,39 +149,39 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
                 />
               </svg>
               <div className="absolute flex flex-col items-center">
-                <span className="text-xl font-bold font-mono text-white">
+                <span className="text-xl font-bold font-mono text-slate-900 dark:text-white">
                   {result.confidence_score}%
                 </span>
-                <span className="text-[10px] uppercase tracking-wider text-slate-400">Score</span>
+                <span className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400">Score</span>
               </div>
             </div>
-            <span className="text-xs text-slate-400 mt-1">Evidence Index</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 mt-1">Evidence Index</span>
           </div>
         </div>
 
         {/* Transparent Limitations Callout */}
-        <div className="mt-5 p-3.5 rounded-xl bg-slate-950/60 border border-white/5 text-xs text-slate-300 flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+        <div className="mt-5 p-3.5 rounded-xl bg-slate-100/90 dark:bg-slate-950/60 border border-slate-200 dark:border-white/5 text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2.5">
+          <Info className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
           <div>
-            <span className="font-semibold text-cyan-300 block mb-0.5">Verification Boundaries & Limitations</span>
-            <p className="text-slate-400 leading-relaxed">{result.limitations}</p>
+            <span className="font-semibold text-cyan-800 dark:text-cyan-300 block mb-0.5">Verification Boundaries & Limitations</span>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{result.limitations}</p>
           </div>
         </div>
 
         {/* Actionable Next Steps Bar */}
-        <div className="mt-5 pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="mt-5 pt-4 border-t border-slate-200 dark:border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-start gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Next Step:
             </span>
-            <span className="text-xs text-slate-200">{result.recommendation}</span>
+            <span className="text-xs text-slate-800 dark:text-slate-200">{result.recommendation}</span>
           </div>
 
           <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
             {result.verdict !== "VERIFIED" && (
               <button
                 onClick={() => onReportFraud(result)}
-                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 rounded-xl transition-all"
+                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-rose-700 dark:text-rose-300 bg-rose-50 hover:bg-rose-100 dark:bg-rose-500/15 dark:hover:bg-rose-500/25 border border-rose-300 dark:border-rose-500/30 rounded-xl transition-all cursor-pointer"
               >
                 <Flag className="w-4 h-4" />
                 Report Discrepancy
@@ -189,7 +189,7 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
             )}
             <button
               onClick={onReset}
-              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all"
+              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-xl transition-all cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
               Scan Another
@@ -200,15 +200,15 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
 
       {/* 2. Matched Supplement Details (if in registry) */}
       {result.product && (
-        <div className="rounded-2xl p-6 glass-panel border border-white/10">
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-            <Building2 className="w-4 h-4 text-cyan-400" />
+        <div className="rounded-2xl p-6 glass-panel border border-slate-200 dark:border-white/10 shadow-xs">
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+            <Building2 className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             Verified Supplement Identity & Formulation
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Image / Thumbnail */}
-            <div className="relative rounded-xl overflow-hidden bg-slate-900 border border-white/5 aspect-square flex items-center justify-center p-3">
+            <div className="relative rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 aspect-square flex items-center justify-center p-3">
               {result.product.image_url ? (
                 <img
                   src={result.product.image_url}
@@ -228,26 +228,26 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
             {/* Spec Attributes */}
             <div className="md:col-span-2 space-y-4">
               <div>
-                <span className="text-xs text-cyan-400 font-bold font-mono">{result.product.brand}</span>
-                <h4 className="text-xl font-bold text-white">{result.product.name}</h4>
-                <p className="text-xs text-slate-300 mt-1">
-                  Variant: <span className="font-semibold text-white">{result.product.variant || "Standard"}</span>
+                <span className="text-xs text-cyan-600 dark:text-cyan-400 font-bold font-mono">{result.product.brand}</span>
+                <h4 className="text-xl font-bold text-slate-900 dark:text-white">{result.product.name}</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 mt-1">
+                  Variant: <span className="font-semibold text-slate-900 dark:text-white">{result.product.variant || "Standard"}</span>
                 </p>
-                <p className="text-xs text-slate-400 mt-1">{result.product.description}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{result.product.description}</p>
               </div>
 
               {/* Attributes Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 border-t border-white/5">
-                <div className="p-2.5 rounded-lg bg-slate-900/60 border border-white/5">
-                  <span className="text-[10px] uppercase text-slate-400 block">Category</span>
-                  <span className="text-xs font-medium text-slate-200">{result.product.category}</span>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-200 dark:border-white/5">
+                <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5">
+                  <span className="text-[10px] uppercase text-slate-500 dark:text-slate-400 block">Category</span>
+                  <span className="text-xs font-medium text-slate-800 dark:text-slate-200">{result.product.category}</span>
                 </div>
-                <div className="p-2.5 rounded-lg bg-slate-900/60 border border-white/5">
-                  <span className="text-[10px] uppercase text-slate-400 block">GTIN / Barcode</span>
-                  <span className="text-xs font-mono font-medium text-cyan-300">{result.product.gtin_barcode}</span>
+                <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5">
+                  <span className="text-[10px] uppercase text-slate-500 dark:text-slate-400 block">GTIN / Barcode</span>
+                  <span className="text-xs font-mono font-medium text-cyan-700 dark:text-cyan-300">{result.product.gtin_barcode}</span>
                 </div>
-                <div className="p-2.5 rounded-lg bg-slate-900/60 border border-white/5">
-                  <span className="text-[10px] uppercase text-slate-400 block">Serving Size</span>
+                <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5">
+                  <span className="text-[10px] uppercase text-slate-500 dark:text-slate-400 block">Serving Size</span>
                   <span className="text-xs font-medium text-slate-200">{result.product.serving_size || "1 Serving"}</span>
                 </div>
               </div>
@@ -302,52 +302,52 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
       )}
 
       {/* 3. Evidence-Based Verification Ledger with Source Citations */}
-      <div className="rounded-2xl p-6 glass-panel border border-white/10">
+      <div className="rounded-2xl p-6 glass-panel border border-slate-200 dark:border-white/10 shadow-xs">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-            <Layers className="w-4 h-4 text-cyan-400" />
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-2">
+            <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             Documented Evidence Records ({result.evidence_records.length})
           </h3>
-          <span className="text-xs text-slate-400">
+          <span className="text-xs text-slate-500 dark:text-slate-400">
             {result.evidence_records.filter((e) => e.classification === "SUPPORTING").length} Supporting Claims
           </span>
         </div>
 
-        <div className="divide-y divide-white/5 space-y-1">
+        <div className="divide-y divide-slate-100 dark:divide-white/5 space-y-1">
           {result.evidence_records.map((item, idx) => (
             <div key={idx} className="pt-3.5 pb-3.5 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
               <div className="flex items-start gap-3">
                 {item.classification === "SUPPORTING" ? (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                 ) : item.classification === "OFFICIAL_ALERT" ? (
-                  <AlertOctagon className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                  <AlertOctagon className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
                 ) : item.classification === "CONTRADICTING" ? (
-                  <XCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                 ) : (
                   <HelpCircle className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
                 )}
 
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-sm font-semibold text-white">{item.source_name}</span>
-                    <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/60 border border-cyan-800/40 px-2 py-0.5 rounded">
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white">{item.source_name}</span>
+                    <span className="text-[10px] font-mono text-cyan-700 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-950/60 border border-cyan-200 dark:border-cyan-800/40 px-2 py-0.5 rounded">
                       {item.source_category}
                     </span>
                     {item.is_verified_fact ? (
-                      <span className="text-[9px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                      <span className="text-[9px] font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded">
                         Verified Fact
                       </span>
                     ) : (
-                      <span className="text-[9px] font-mono text-slate-400 bg-slate-800 px-1.5 py-0.5 rounded">
+                      <span className="text-[9px] font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
                         AI Observation
                       </span>
                     )}
                   </div>
 
-                  <p className="text-xs text-slate-200">{item.claim_supported}</p>
+                  <p className="text-xs text-slate-700 dark:text-slate-200">{item.claim_supported}</p>
 
                   {item.extracted_passage && (
-                    <blockquote className="text-[11px] font-mono text-slate-400 border-l-2 border-slate-700 pl-2 mt-1">
+                    <blockquote className="text-[11px] font-mono text-slate-600 dark:text-slate-400 border-l-2 border-slate-300 dark:border-slate-700 pl-2 mt-1">
                       "{item.extracted_passage}"
                     </blockquote>
                   )}
@@ -361,7 +361,7 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
                       href={item.source_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-cyan-400 hover:text-cyan-300 underline"
+                      className="flex items-center gap-1 text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 underline"
                     >
                       <Globe className="w-3 h-3" />
                       Inspect Source Reference
@@ -375,10 +375,10 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
                 <span
                   className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono uppercase tracking-wider ${
                     item.classification === "SUPPORTING"
-                      ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                      ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/20"
                       : item.classification === "OFFICIAL_ALERT"
-                      ? "bg-rose-500/20 text-rose-400 border border-rose-500/30"
-                      : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                      ? "bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-300 dark:border-rose-500/30"
+                      : "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-500/20"
                   }`}
                 >
                   {item.classification.replace(/_/g, " ")}
@@ -391,9 +391,9 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
 
       {/* 4. Sources Consulted Summary */}
       {result.sources_consulted && result.sources_consulted.length > 0 && (
-        <div className="p-4 rounded-2xl glass-panel border border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
-          <span className="flex items-center gap-1.5 font-medium text-slate-300">
-            <Globe className="w-4 h-4 text-cyan-400" />
+        <div className="p-4 rounded-2xl glass-panel border border-slate-200 dark:border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400 shadow-xs">
+          <span className="flex items-center gap-1.5 font-medium text-slate-700 dark:text-slate-300">
+            <Globe className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             Independent Sources Consulted ({result.sources_consulted.length}):
           </span>
           <div className="flex flex-wrap gap-2">
@@ -403,10 +403,10 @@ export function VerdictDisplay({ result, onReset, onReportFraud }: VerdictDispla
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-2.5 py-1 rounded-lg bg-slate-900 border border-white/10 hover:border-cyan-400 text-slate-300 text-[11px] font-mono flex items-center gap-1 transition-colors"
+                className="px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 hover:border-cyan-400 text-slate-700 dark:text-slate-300 text-[11px] font-mono flex items-center gap-1 transition-colors"
               >
                 {s.name}
-                <ExternalLink className="w-2.5 h-2.5 text-cyan-400" />
+                <ExternalLink className="w-2.5 h-2.5 text-cyan-600 dark:text-cyan-400" />
               </a>
             ))}
           </div>

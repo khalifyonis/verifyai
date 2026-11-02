@@ -1014,13 +1014,13 @@ export function AdminDashboard({ onSwitchPortal }: AdminDashboardProps) {
                         },
                       ].map((item, i) => (
                         <tr key={i} className="hover:bg-white/[0.02]">
-                          <td className="p-3.5 text-cyan-400 font-bold">{item.id}</td>
-                          <td className="p-3.5 text-slate-400">{item.time}</td>
-                          <td className="p-3.5 text-white font-sans font-medium">{item.actor}</td>
+                          <td className="p-3.5 text-cyan-600 dark:text-cyan-400 font-bold">{item.id}</td>
+                          <td className="p-3.5 text-slate-500 dark:text-slate-400">{item.time}</td>
+                          <td className="p-3.5 text-slate-900 dark:text-white font-sans font-medium">{item.actor}</td>
                           <td className={`p-3.5 font-bold ${item.color}`}>{item.action}</td>
-                          <td className="p-3.5 text-slate-300 font-sans">{item.target}</td>
-                          <td className="p-3.5 text-slate-400">{item.ip}</td>
-                          <td className="p-3.5 text-right text-cyan-300">{item.hash}</td>
+                          <td className="p-3.5 text-slate-700 dark:text-slate-300 font-sans">{item.target}</td>
+                          <td className="p-3.5 text-slate-500 dark:text-slate-400">{item.ip}</td>
+                          <td className="p-3.5 text-right text-cyan-600 dark:text-cyan-300">{item.hash}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -1034,52 +1034,52 @@ export function AdminDashboard({ onSwitchPortal }: AdminDashboardProps) {
           {activeMenu === "settings" && (
             <div className="space-y-6 animate-in fade-in max-w-4xl">
               <div>
-                <h2 className="text-2xl font-extrabold text-white flex items-center gap-2.5">
-                  <Settings className="w-7 h-7 text-cyan-400" />
+                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2.5">
+                  <Settings className="w-7 h-7 text-cyan-600 dark:text-cyan-400" />
                   System Security & Verification Parameters
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
                   Configure AI OCR tolerance, GS1 ledger webhooks, and regulatory enforcement thresholds.
                 </p>
               </div>
 
               <div className="space-y-4">
-                <div className="p-5 rounded-2xl bg-[#0D172A] border border-white/10 space-y-4">
-                  <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-cyan-400" />
+                <div className="p-5 rounded-2xl bg-white dark:bg-[#0D172A] border border-slate-200 dark:border-white/10 space-y-4 shadow-xs">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Shield className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                     AI Packaging Forensics & Tolerance Thresholds
                   </h3>
                   <div className="space-y-3 text-xs">
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#091120] border border-white/5">
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-[#091120] border border-slate-200 dark:border-white/5">
                       <div>
-                        <span className="font-bold text-white block">Tamper Neck Seal AI Confidence Requirement</span>
-                        <span className="text-slate-400 text-[11px]">Reject scans if holographic print accuracy falls below threshold</span>
+                        <span className="font-bold text-slate-900 dark:text-white block">Tamper Neck Seal AI Confidence Requirement</span>
+                        <span className="text-slate-500 dark:text-slate-400 text-[11px]">Reject scans if holographic print accuracy falls below threshold</span>
                       </div>
-                      <span className="font-mono text-cyan-400 font-bold px-2 py-1 bg-cyan-950 rounded">95.0%</span>
+                      <span className="font-mono text-cyan-700 dark:text-cyan-400 font-bold px-2 py-1 bg-cyan-100 dark:bg-cyan-950 rounded">95.0%</span>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#091120] border border-white/5">
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-[#091120] border border-slate-200 dark:border-white/5">
                       <div>
-                        <span className="font-bold text-white block">Automated Field Task Force Seizure Dispatch</span>
-                        <span className="text-slate-400 text-[11px]">Automatically broadcast notices when banned DMAA/DMHA stimulants detected</span>
+                        <span className="font-bold text-slate-900 dark:text-white block">Automated Field Task Force Seizure Dispatch</span>
+                        <span className="text-slate-500 dark:text-slate-400 text-[11px]">Automatically broadcast notices when banned DMAA/DMHA stimulants detected</span>
                       </div>
-                      <span className="text-emerald-400 font-mono text-[11px] font-bold">ENABLED</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-mono text-[11px] font-bold">ENABLED</span>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#091120] border border-white/5">
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-[#091120] border border-slate-200 dark:border-white/5">
                       <div>
-                        <span className="font-bold text-white block">Global GS1 Barcode Registry Webhook</span>
-                        <span className="text-slate-400 text-[11px]">Real-time synchronization with international supplement databases</span>
+                        <span className="font-bold text-slate-900 dark:text-white block">Global GS1 Barcode Registry Webhook</span>
+                        <span className="text-slate-500 dark:text-slate-400 text-[11px]">Real-time synchronization with international supplement databases</span>
                       </div>
-                      <span className="text-emerald-400 font-mono text-[11px] font-bold">CONNECTED (200 OK)</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-mono text-[11px] font-bold">CONNECTED (200 OK)</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#0D172A] border border-white/10 flex items-center justify-between">
+                <div className="p-5 rounded-2xl bg-white dark:bg-[#0D172A] border border-slate-200 dark:border-white/10 flex items-center justify-between shadow-xs">
                   <div>
-                    <h3 className="text-sm font-bold text-white">System Visual Theme Mode</h3>
-                    <p className="text-xs text-slate-400 mt-0.5">Toggle between high-contrast dark cybersecurity mode and crisp light daylight mode.</p>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">System Visual Theme Mode</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Toggle between high-contrast dark cybersecurity mode and crisp light daylight mode.</p>
                   </div>
                   <ThemeToggle showLabel />
                 </div>
@@ -1099,10 +1099,10 @@ export function AdminDashboard({ onSwitchPortal }: AdminDashboardProps) {
 
       {/* Forensic Dossier Inspection Modal */}
       {isDossierOpen && selectedQueueItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in">
-          <div className="relative w-full max-w-2xl rounded-3xl bg-[#091120] border border-cyan-500/30 p-6 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in">
+          <div className="relative w-full max-w-2xl rounded-3xl bg-white dark:bg-[#091120] border border-slate-200 dark:border-cyan-500/30 p-6 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="flex items-start justify-between border-b border-white/10 pb-4">
+            <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
               <div className="flex items-center gap-3">
                 {selectedQueueItem.image && (
                   <img
@@ -1113,17 +1113,17 @@ export function AdminDashboard({ onSwitchPortal }: AdminDashboardProps) {
                 )}
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-cyan-400">
+                    <span className="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400">
                       {selectedQueueItem.id || "QUEUE-ITEM"}
                     </span>
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/30 font-bold">
+                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/30 font-bold">
                       {selectedQueueItem.statusTitle || selectedQueueItem.status || "Investigation"}
                     </span>
                   </div>
-                  <h3 className="text-base font-bold text-white mt-1">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">
                     {selectedQueueItem.product || selectedQueueItem.title}
                   </h3>
-                  <div className="text-xs text-slate-400 font-mono">
+                  <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                     {selectedQueueItem.brand && `${selectedQueueItem.brand} • `}
                     {selectedQueueItem.batch || selectedQueueItem.count}
                   </div>
@@ -1131,7 +1131,7 @@ export function AdminDashboard({ onSwitchPortal }: AdminDashboardProps) {
               </div>
               <button
                 onClick={() => setIsDossierOpen(false)}
-                className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+                className="p-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1139,42 +1139,42 @@ export function AdminDashboard({ onSwitchPortal }: AdminDashboardProps) {
 
             {/* Evidence & Forensics Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-              <div className="p-3.5 rounded-2xl bg-slate-900 border border-white/5 space-y-1">
-                <span className="text-[10px] font-mono uppercase text-slate-400 font-bold">Barcode (GTIN-13)</span>
-                <div className="font-mono text-cyan-300 font-semibold">{selectedQueueItem.barcode || "0748927028669"}</div>
-                <div className="text-[10px] text-emerald-400 flex items-center gap-1 font-mono pt-0.5">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" /> GS1 Checksum Valid
+              <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/5 space-y-1">
+                <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold">Barcode (GTIN-13)</span>
+                <div className="font-mono text-cyan-700 dark:text-cyan-300 font-semibold">{selectedQueueItem.barcode || "0748927028669"}</div>
+                <div className="text-[10px] text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-mono pt-0.5">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> GS1 Checksum Valid
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-slate-900 border border-white/5 space-y-1">
-                <span className="text-[10px] font-mono uppercase text-slate-400 font-bold">Batch & Shelf Life</span>
-                <div className="font-mono text-white font-semibold">
+              <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/5 space-y-1">
+                <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold">Batch & Shelf Life</span>
+                <div className="font-mono text-slate-900 dark:text-white font-semibold">
                   {selectedQueueItem.batch || "OPN-2026-W98"} (Exp: {selectedQueueItem.expiry || "2027-06"})
                 </div>
-                <div className="text-[10px] text-slate-400 font-mono pt-0.5">
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono pt-0.5">
                   Reported at: {selectedQueueItem.location || "Central Regional Point"}
                 </div>
               </div>
             </div>
 
             {/* AI Forensics Finding */}
-            <div className="p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/20 space-y-2">
-              <span className="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
+            <div className="p-4 rounded-2xl bg-cyan-50 dark:bg-cyan-950/20 border border-cyan-200 dark:border-cyan-500/20 space-y-2">
+              <span className="text-xs font-bold text-cyan-800 dark:text-cyan-300 flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 AI Forensic Analysis & Visual Discrepancy Findings
               </span>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                 {selectedQueueItem.detail}
               </p>
             </div>
 
             {/* Compliance Decision Actions */}
-            <div className="pt-2 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="pt-2 border-t border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => setIsDossierOpen(false)}
-                className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white text-xs font-semibold"
+                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xs font-semibold transition-colors"
               >
                 Dismiss Window
               </button>

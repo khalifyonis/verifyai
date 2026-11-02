@@ -78,15 +78,15 @@ export function PresetBarcodes({ onSelectPreset }: PresetBarcodesProps) {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto mt-6 p-4 rounded-2xl glass-panel border border-white/10">
+    <div className="w-full max-w-4xl mx-auto mt-6 p-4 rounded-2xl glass-panel border border-slate-200 dark:border-white/10 shadow-xs">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Dumbbell className="w-4 h-4 text-cyan-400" />
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+          <Dumbbell className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
             Fitness & Sports Nutrition Verification Presets
           </h4>
         </div>
-        <span className="text-[10px] text-slate-400 font-mono">1-Click Test Scenarios</span>
+        <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">1-Click Test Scenarios</span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
@@ -96,30 +96,30 @@ export function PresetBarcodes({ onSelectPreset }: PresetBarcodesProps) {
             <button
               key={idx}
               onClick={() => onSelectPreset(p)}
-              className="text-left p-3 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 border border-white/5 hover:border-cyan-500/40 transition-all group flex flex-col justify-between"
+              className="text-left p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-white/5 hover:border-cyan-400 dark:hover:border-cyan-500/40 transition-all group flex flex-col justify-between cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <Icon className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+                  <Icon className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
                   <span
                     className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded font-mono ${
                       p.color === "emerald"
-                        ? "bg-emerald-500/20 text-emerald-400"
+                        ? "bg-emerald-50 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30"
                         : p.color === "amber"
-                        ? "bg-amber-500/20 text-amber-400"
+                        ? "bg-amber-50 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30"
                         : p.color === "rose"
-                        ? "bg-rose-500/20 text-rose-400"
-                        : "bg-slate-700/40 text-slate-400"
+                        ? "bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/30"
+                        : "bg-slate-100 dark:bg-slate-700/40 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-600/30"
                     }`}
                   >
                     {p.badge}
                   </span>
                 </div>
-                <span className="text-xs font-semibold text-white block line-clamp-1">
+                <span className="text-xs font-semibold text-slate-900 dark:text-white block line-clamp-1">
                   {p.label}
                 </span>
-                <span className="text-[10px] text-cyan-300/80 block line-clamp-1">{p.sub}</span>
-                <span className="text-[10px] text-slate-400 block mt-1">{p.desc}</span>
+                <span className="text-[10px] text-cyan-700 dark:text-cyan-300/80 block line-clamp-1">{p.sub}</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">{p.desc}</span>
               </div>
               <span className="text-[10px] font-mono text-slate-500 mt-2 block truncate">
                 GTIN: {p.barcode}

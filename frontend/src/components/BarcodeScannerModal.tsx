@@ -104,17 +104,17 @@ export function BarcodeScannerModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
       <div className="relative w-full max-w-lg rounded-2xl glass-panel border border-cyan-500/30 overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.2)]">
         {/* Modal Header */}
-        <div className="flex items-center justify-between p-4 border-b border-white/10 bg-slate-900/50">
+        <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/50">
           <div className="flex items-center gap-2">
-            <Camera className="w-5 h-5 text-cyan-400" />
-            <h3 className="font-semibold text-white">Live Barcode & QR Scanner</h3>
+            <Camera className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+            <h3 className="font-semibold text-slate-900 dark:text-white">Live Barcode & QR Scanner</h3>
           </div>
           <button
             onClick={() => {
               stopScanner();
               onClose();
             }}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-1 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -164,14 +164,14 @@ export function BarcodeScannerModal({
         </div>
 
         {/* Modal Footer */}
-        <div className="p-3 border-t border-white/10 bg-slate-900/60 flex items-center justify-between text-xs text-slate-400">
+        <div className="p-3 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900/60 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
           <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+            <span className="w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
             GS1 EAN-13, UPC-A & 2D DataMatrix
           </span>
           <button
             onClick={() => setCameraFacing((prev) => (prev === "environment" ? "user" : "environment"))}
-            className="flex items-center gap-1 px-2.5 py-1 text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 rounded-md transition-colors"
+            className="flex items-center gap-1 px-2.5 py-1 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-md transition-colors"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             Switch Camera

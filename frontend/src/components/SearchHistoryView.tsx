@@ -337,15 +337,15 @@ GS1 & Cryptographic Ledger Validated
 
                               {/* Dropdown Menu matching Gemini_Generated_Image_wea2k9wea2k9wea2 (2).jpg */}
                               {openDropdownId === row.id && (
-                                <div className="absolute right-0 top-12 w-48 rounded-xl bg-[#0E1729] border border-white/10 shadow-2xl p-1.5 z-30 animate-in fade-in text-xs space-y-0.5">
+                                <div className="absolute right-0 top-12 w-48 rounded-xl bg-white dark:bg-[#0E1729] border border-slate-200 dark:border-white/10 shadow-2xl p-1.5 z-30 animate-in fade-in text-xs space-y-0.5">
                                   <button
                                     onClick={() => {
                                       setOpenDropdownId(null);
                                       onInspectEvidence(row);
                                     }}
-                                    className="w-full text-left px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-300 hover:text-white flex items-center gap-2"
+                                    className="w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center gap-2"
                                   >
-                                    <Eye className="w-3.5 h-3.5 text-cyan-400" />
+                                    <Eye className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                                     Review Evidence
                                   </button>
                                   <button
@@ -353,7 +353,7 @@ GS1 & Cryptographic Ledger Validated
                                       setOpenDropdownId(null);
                                       onOpenReportModal(row);
                                     }}
-                                    className="w-full text-left px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-semibold flex items-center gap-2"
+                                    className="w-full text-left px-3 py-1.5 rounded-lg bg-rose-50 dark:bg-rose-500/10 hover:bg-rose-100 dark:hover:bg-rose-500/20 text-rose-700 dark:text-rose-400 font-semibold flex items-center gap-2"
                                   >
                                     <Flag className="w-3.5 h-3.5" />
                                     Report Fake
@@ -363,9 +363,9 @@ GS1 & Cryptographic Ledger Validated
                                       setOpenDropdownId(null);
                                       alert("Opening support ticket for this batch...");
                                     }}
-                                    className="w-full text-left px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-300 hover:text-white flex items-center gap-2"
+                                    className="w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center gap-2"
                                   >
-                                    <Headphones className="w-3.5 h-3.5 text-indigo-400" />
+                                    <Headphones className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                                     Contact Support
                                   </button>
                                 </div>

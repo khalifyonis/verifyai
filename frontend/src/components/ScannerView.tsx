@@ -121,24 +121,24 @@ export function ScannerView() {
         <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
           {/* Hero Heading */}
           <div className="text-center space-y-3 pt-4 sm:pt-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-mono">
               <Dumbbell className="w-3.5 h-3.5" />
               Evidence-Based Gym Supplement & Fitness Product Verification
             </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Verify Your Supplements with <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">Trusted Evidence & Records</span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Verify Your Supplements with <span className="bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-500 dark:from-cyan-400 dark:via-indigo-400 dark:to-emerald-400 bg-clip-text text-transparent">Trusted Evidence & Records</span>
             </h1>
-            <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
               Protect your health from counterfeit protein powders, tainted pre-workouts, and unverified creatine. Cross-reference batch records, GS1 registries, and sports certifications.
             </p>
           </div>
 
           {/* Interactive Scanner Card */}
-          <div className="p-6 sm:p-8 rounded-3xl glass-panel border border-cyan-500/20 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+          <div className="p-6 sm:p-8 rounded-3xl glass-panel border border-cyan-500/20 shadow-xs">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
               {/* Left Column: Live Camera Trigger & Image Upload */}
               <div className="space-y-4">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Step 1: Visual Capture or Camera Scan
                 </label>
 
@@ -146,16 +146,16 @@ export function ScannerView() {
                 <button
                   type="button"
                   onClick={() => setIsCameraOpen(true)}
-                  className="w-full relative group h-44 rounded-2xl border-2 border-dashed border-cyan-500/40 hover:border-cyan-400 bg-cyan-950/20 hover:bg-cyan-950/30 flex flex-col items-center justify-center gap-3 transition-all cursor-pointer overflow-hidden"
+                  className="w-full relative group h-44 rounded-2xl border-2 border-dashed border-cyan-400 dark:border-cyan-500/40 hover:border-cyan-500 bg-cyan-50/60 dark:bg-cyan-950/20 hover:bg-cyan-50 dark:hover:bg-cyan-950/30 flex flex-col items-center justify-center gap-3 transition-all cursor-pointer overflow-hidden shadow-2xs"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Camera className="w-7 h-7 text-cyan-400" />
+                    <Camera className="w-7 h-7 text-cyan-600 dark:text-cyan-400" />
                   </div>
                   <div className="text-center">
-                    <span className="text-sm font-bold text-white block">
+                    <span className="text-sm font-bold text-slate-900 dark:text-white block">
                       Open Camera Barcode Scanner
                     </span>
-                    <span className="text-xs text-cyan-300/80">
+                    <span className="text-xs text-cyan-700 dark:text-cyan-300/80">
                       Align container barcode or QR code
                     </span>
                   </div>
@@ -173,22 +173,22 @@ export function ScannerView() {
                   />
                   <label
                     htmlFor="packaging-upload"
-                    className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 border border-white/10 hover:border-white/20 transition-all cursor-pointer"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 transition-all cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-white/5 text-slate-300">
-                        <ImageIcon className="w-4 h-4 text-cyan-400" />
+                      <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300">
+                        <ImageIcon className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                       </div>
                       <div>
-                        <span className="text-xs font-medium text-white block">
+                        <span className="text-xs font-medium text-slate-900 dark:text-white block">
                           {imagePreview ? "Packaging Photo Attached" : "Upload Tub / Label Photo (Optional)"}
                         </span>
-                        <span className="text-[10px] text-slate-400">
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">
                           For AI seal, hologram & batch stamp inspection
                         </span>
                       </div>
                     </div>
-                    <span className="text-xs font-medium text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-md border border-cyan-500/20">
+                    <span className="text-xs font-medium text-cyan-700 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-500/10 px-2.5 py-1 rounded-md border border-cyan-200 dark:border-cyan-500/20">
                       {imagePreview ? "Replace" : "Browse"}
                     </span>
                   </label>
@@ -212,17 +212,17 @@ export function ScannerView() {
 
               {/* Right Column: Supplement Codes & Attributes */}
               <div className="space-y-4">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Step 2: Enter or Confirm Codes
                 </label>
 
                 {/* Barcode Input */}
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-medium text-slate-300">
-                      Barcode / GTIN Number <span className="text-cyan-400">*</span>
+                    <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
+                      Barcode / GTIN Number <span className="text-cyan-600 dark:text-cyan-400">*</span>
                     </span>
-                    <span className="text-[10px] text-slate-400 font-mono">12-14 digits</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">12-14 digits</span>
                   </div>
                   <div className="relative">
                     <input
@@ -232,13 +232,13 @@ export function ScannerView() {
                       placeholder="e.g. 0748927028669"
                       className="w-full pl-10 pr-4 py-3 rounded-xl glass-input text-sm font-mono tracking-wider"
                     />
-                    <ScanLine className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3.5" />
+                    <ScanLine className="w-4 h-4 text-cyan-600 dark:text-cyan-400 absolute left-3.5 top-3.5" />
                   </div>
                 </div>
 
                 {/* Product Name / Hint */}
                 <div className="space-y-1">
-                  <span className="text-xs font-medium text-slate-300">
+                  <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
                     Product Name / Flavor (Optional)
                   </span>
                   <input
@@ -253,7 +253,7 @@ export function ScannerView() {
                 {/* Batch & Expiry Inputs Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <span className="text-xs font-medium text-slate-300">Batch / LOT Code</span>
+                    <span className="text-xs font-medium text-slate-700 dark:text-slate-300">Batch / LOT Code</span>
                     <input
                       type="text"
                       value={batchNumber}
@@ -264,7 +264,7 @@ export function ScannerView() {
                   </div>
 
                   <div className="space-y-1">
-                    <span className="text-xs font-medium text-slate-300">Expiration Date</span>
+                    <span className="text-xs font-medium text-slate-700 dark:text-slate-300">Expiration Date</span>
                     <input
                       type="text"
                       value={expiryDate}
